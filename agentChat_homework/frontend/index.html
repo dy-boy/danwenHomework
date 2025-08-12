@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoGen Chat - AI智能助手</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="material-icons">smart_toy</span>
+                    <h1>AutoGen Chat</h1>
+                </div>
+            </div>
+            
+            <div class="sidebar-content">
+                <div class="new-chat-btn" onclick="startNewChat()">
+                    <span class="material-icons">add</span>
+                    <span>新建对话</span>
+                </div>
+                
+                <div class="chat-history">
+                    <h3>对话历史</h3>
+                    <div id="chatHistoryList">
+                        <!-- 对话历史将在这里动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主聊天区域 -->
+        <div class="main-content">
+            <!-- 顶部栏 -->
+            <div class="top-bar">
+                <div class="chat-title">
+                    <h2 id="currentChatTitle">AutoGen AI助手</h2>
+                    <span class="status-indicator" id="statusIndicator">
+                        <span class="status-dot"></span>
+                        <span class="status-text">就绪</span>
+                    </span>
+                </div>
+                
+                <div class="top-actions">
+                    <button class="action-btn" onclick="clearChat()" title="清空对话">
+                        <span class="material-icons">clear_all</span>
+                    </button>
+                    <button class="action-btn" onclick="toggleTheme()" title="切换主题">
+                        <span class="material-icons">dark_mode</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 聊天消息区域 -->
+            <div class="chat-container">
+                <div class="messages-container" id="messagesContainer">
+                    <!-- 欢迎消息 -->
+                    <div class="welcome-message">
+                        <div class="welcome-icon">
+                            <span class="material-icons">psychology</span>
+                        </div>
+                        <h2>欢迎使用 AutoGen Chat</h2>
+                        <p>我是基于AutoGen 0.5.7构建的AI智能助手，可以帮助您解答各种问题。</p>
+                        <div class="suggestion-chips">
+                            <div class="chip" onclick="sendSuggestion('介绍一下AutoGen框架')">
+                                介绍AutoGen框架
+                            </div>
+                            <div class="chip" onclick="sendSuggestion('帮我写一个Python函数')">
+                                编写Python代码
+                            </div>
+                            <div class="chip" onclick="sendSuggestion('解释机器学习的基本概念')">
+                                机器学习概念
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 输入区域 -->
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <div class="input-box">
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="输入您的问题..." 
+                            rows="1"
+                            onkeydown="handleKeyDown(event)"
+                            oninput="adjustTextareaHeight(this)"
+                        ></textarea>
+                        <button id="sendButton" onclick="sendMessage()" disabled>
+                            <span class="material-icons">send</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="input-footer">
+                    <span class="footer-text">AutoGen Chat 可能会出错。请核实重要信息。</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载指示器 -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>AI正在思考中...</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
