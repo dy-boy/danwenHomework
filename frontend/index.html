@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoGen Chat - 智能对话助手</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>AutoGen Chat</span>
+                </div>
+                <button class="new-chat-btn" onclick="startNewChat()">
+                    <i class="fas fa-plus"></i>
+                    新对话
+                </button>
+            </div>
+            
+            <div class="chat-history">
+                <div class="history-item active">
+                    <i class="fas fa-message"></i>
+                    <span>当前对话</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="model-info">
+                    <i class="fas fa-brain"></i>
+                    <span>DeepSeek-R1</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 主聊天区域 -->
+        <main class="chat-main">
+            <div class="chat-header">
+                <h1>AutoGen 智能助手</h1>
+                <p>基于 AutoGen 0.5.7 的智能对话系统</p>
+            </div>
+
+            <div class="chat-container">
+                <div class="messages-container" id="messagesContainer">
+                    <div class="welcome-message">
+                        <div class="welcome-icon">
+                            <i class="fas fa-sparkles"></i>
+                        </div>
+                        <h2>欢迎使用 AutoGen Chat</h2>
+                        <p>我是您的智能助手，可以帮助您解答问题、提供建议和进行对话。</p>
+                        <div class="suggestion-chips">
+                            <button class="chip" onclick="sendSuggestion('帮我写一个Python函数')">
+                                <i class="fas fa-code"></i>
+                                编程帮助
+                            </button>
+                            <button class="chip" onclick="sendSuggestion('解释一下机器学习的基本概念')">
+                                <i class="fas fa-graduation-cap"></i>
+                                学习指导
+                            </button>
+                            <button class="chip" onclick="sendSuggestion('帮我规划一下今天的工作')">
+                                <i class="fas fa-calendar"></i>
+                                日程规划
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="输入您的消息..." 
+                            rows="1"
+                            onkeydown="handleKeyDown(event)"
+                        ></textarea>
+                        <button id="sendButton" onclick="sendMessage()" disabled>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="input-footer">
+                        <span class="tip">按 Enter 发送，Shift + Enter 换行</span>
+                        <div class="status" id="status">就绪</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 加载动画 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>AI 正在思考中...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
